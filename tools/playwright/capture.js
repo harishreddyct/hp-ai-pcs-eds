@@ -112,6 +112,19 @@ async function capturePage(browser, {
   await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
   await waitForDecoration(page);
 
+  // force lazy-loaded images below the fold to fire before measuring/screenshotting
+  await page.evaluate(async () => {
+    const step = window.innerHeight;
+    const max = document.body.scrollHeight;
+    for (let y = 0; y < max; y += step) {
+      window.scrollTo(0, y);
+      // eslint-disable-next-line no-await-in-loop
+      await new Promise((resolve) => { setTimeout(resolve, 150); });
+    }
+    window.scrollTo(0, 0);
+  });
+  await page.waitForTimeout(500);
+
   const actualWidth = await page.evaluate(() => window.innerWidth);
 
   fs.mkdirSync(path.join(outDir, 'screenshots'), { recursive: true });

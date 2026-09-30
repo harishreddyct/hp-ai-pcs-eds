@@ -43,7 +43,7 @@ function parseArgs() {
   );
   return {
     url: args.url || DEFAULT_URL,
-    reference: args['no-reference'] !== undefined ? null : (args.reference || DEFAULT_REFERENCE),
+    reference: 'no-reference' in args ? null : (args.reference || DEFAULT_REFERENCE),
     breakpoints: (args.breakpoints || '375,768,960,1200,1440').split(',').map(Number),
     outDir: args.out || path.join(__dirname, '..', '..', 'reports'),
   };
