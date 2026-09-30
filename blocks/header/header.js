@@ -140,6 +140,16 @@ export default async function decorate(block) {
     });
   }
 
+  // label the icon-only tools links for assistive tech
+  const iconLabels = { search: 'Search', cart: 'Cart', account: 'Sign in' };
+  nav.querySelectorAll('.nav-tools img[data-icon-name]').forEach((img) => {
+    const label = iconLabels[img.dataset.iconName];
+    if (!label) return;
+    img.alt = label;
+    const link = img.closest('a');
+    if (link) link.setAttribute('aria-label', label);
+  });
+
   // hamburger for mobile
   const hamburger = document.createElement('div');
   hamburger.classList.add('nav-hamburger');

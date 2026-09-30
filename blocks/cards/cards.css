@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(257px, 1fr));
   gap: 24px;
 }
 
@@ -28,7 +28,7 @@
 
 /* benefits: icon + text, no border/image treatment */
 .cards.benefits > ul {
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
 .cards.benefits > ul > li {
@@ -52,23 +52,47 @@
   font-size: var(--heading-font-size-xs);
 }
 
-/* portfolio: taller image, secondary "Learn" link promoted to button */
+/* portfolio: taller image, "Learn" link promoted to primary button, always 3-up above phone width */
+.cards.portfolio > ul {
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+.cards.portfolio > ul > li {
+  border: none;
+  background: none;
+  padding: 10px;
+}
+
 .cards.portfolio .cards-card-image img {
   aspect-ratio: 3 / 4;
+  border-radius: 16px;
 }
 
 .cards.portfolio .cards-card-body h3 {
   margin-top: 0;
 }
 
+@media (width >= 440px) {
+  .cards.portfolio > ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (width >= 1200px) {
+  .cards.portfolio > ul > li {
+    padding: 12px;
+  }
+}
+
 /* product: image on light background, contained not cropped */
 .cards.product > ul {
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
 .cards.product > ul > li {
   border: none;
-  background-color: var(--light-color);
+  background: none;
 }
 
 .cards.product .cards-card-image {
@@ -86,7 +110,7 @@
 
 /* feature: flat (no border/bg), landscape image, heading + copy, no CTA */
 .cards.feature > ul {
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
 .cards.feature > ul > li {
