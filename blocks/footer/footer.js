@@ -16,5 +16,24 @@ export default async function decorate(block) {
   const footer = document.createElement('div');
   while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
 
+  // collapse each footer nav column into a dropdown; CSS keeps them
+  // permanently expanded above the tablet/desktop breakpoint
+  footer.querySelectorAll('.footer-nav > div > div').forEach((col) => {
+    const heading = col.querySelector('h3');
+    const list = col.querySelector('ul');
+    if (!heading || !list) return;
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.setAttribute('aria-expanded', 'false');
+    button.append(...heading.childNodes);
+    heading.append(button);
+    list.hidden = true;
+    button.addEventListener('click', () => {
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', String(!expanded));
+      list.hidden = expanded;
+    });
+  });
+
   block.append(footer);
 }

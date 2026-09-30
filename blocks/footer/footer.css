@@ -1,7 +1,11 @@
 footer {
-  background-color: var(--light-color);
+  background-color: var(--surface-dark-color);
   font-size: var(--body-font-size-xs);
-  color: var(--dark-color);
+  color: #fff;
+}
+
+footer .footer a:any-link {
+  color: inherit;
 }
 
 footer .footer > div {
@@ -17,7 +21,7 @@ footer .footer p {
 footer .footer .section + .section {
   margin-top: 32px;
   padding-top: 24px;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid rgb(255 255 255 / 20%);
 }
 
 footer .footer .section.legal a {
@@ -27,6 +31,101 @@ footer .footer .section.legal a {
 
 footer .footer .section.copyright p {
   margin-top: 16px;
-  color: var(--dark-color);
+  color: inherit;
+}
+
+/* footer nav: dropdowns below the desktop breakpoint, plain columns above it */
+footer .footer .footer-nav > div {
+  flex-direction: column;
+  gap: 0;
+}
+
+footer .footer .footer-nav > div > div {
+  border-top: 1px solid rgb(255 255 255 / 20%);
+}
+
+footer .footer .footer-nav > div > div:last-child {
+  border-bottom: 1px solid rgb(255 255 255 / 20%);
+}
+
+footer .footer .footer-nav h3 {
+  margin: 0;
+  font-size: var(--body-font-size-s);
+}
+
+footer .footer .footer-nav h3 button {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+footer .footer .footer-nav h3 button::after {
+  content: '';
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  margin-left: 8px;
+  border: 2px solid currentcolor;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+footer .footer .footer-nav h3 button[aria-expanded='true']::after {
+  transform: rotate(225deg);
+}
+
+footer .footer .footer-nav h3 button:focus-visible {
+  outline: 2px solid currentcolor;
+  outline-offset: 2px;
+}
+
+footer .footer .footer-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+footer .footer .footer-nav ul[hidden] {
+  display: none;
+}
+
+@media (width >= 1024px) {
+  footer .footer .footer-nav > div {
+    flex-direction: row;
+    align-items: start;
+    gap: 24px;
+  }
+
+  footer .footer .footer-nav > div > div {
+    flex: 1;
+    border-top: none;
+    border-bottom: none;
+  }
+
+  footer .footer .footer-nav h3 button {
+    padding: 0 0 12px;
+    cursor: default;
+  }
+
+  footer .footer .footer-nav h3 button::after {
+    display: none;
+  }
+
+  footer .footer .footer-nav ul[hidden] {
+    display: flex;
+  }
+
+  footer .footer .footer-nav ul {
+    padding: 0;
+  }
 }
 
