@@ -28,7 +28,7 @@ const BLOCK_SELECTORS = [
   '.cards.benefits',
   '.cards.portfolio',
   '.cards.product',
-  '.columns.alternating',
+  '.cards.feature',
   '.promo:not(.dark)',
   '.promo.dark',
   '.accordion',
