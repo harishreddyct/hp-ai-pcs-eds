@@ -7,6 +7,8 @@ export default function decorate(block) {
   const mediaRow = rows.find((row) => row.querySelector('picture'));
   const contentRow = rows.find((row) => row !== mediaRow);
 
-  if (mediaRow) mediaRow.firstElementChild?.classList.add('promo-media');
-  if (contentRow) contentRow.firstElementChild?.classList.add('promo-content');
+  // The row itself is the real flex item (a direct child of the block);
+  // its cell is a grandchild, so flex-basis on the cell would have no effect.
+  if (mediaRow) mediaRow.classList.add('promo-media');
+  if (contentRow) contentRow.classList.add('promo-content');
 }

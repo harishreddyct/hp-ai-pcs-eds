@@ -7,12 +7,15 @@
 export default function decorate(block) {
   const rows = [...block.children];
   const mediaRow = rows.find((row) => row.querySelector('picture'));
-  if (mediaRow) mediaRow.firstElementChild?.classList.add('hero-media');
+  // The row itself is the real flex item (a direct child of the block);
+  // its cell is a grandchild, so flex-basis on the cell would have no effect.
+  if (mediaRow) mediaRow.classList.add('hero-media');
 
   const h1 = block.querySelector('h1');
   if (!h1) return;
   const content = h1.parentElement;
-  content.classList.add('hero-content');
+  const contentRow = rows.find((row) => row.contains(h1));
+  if (contentRow) contentRow.classList.add('hero-content');
 
   const badges = document.createElement('div');
   badges.className = 'hero-badges';
