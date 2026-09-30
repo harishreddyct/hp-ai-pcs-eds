@@ -333,3 +333,48 @@ main .section.small-print p {
 main .section.no-margin {
   margin: 0;
 }
+
+/* photo-bg: full-bleed background image with content overlaid on top,
+   same treatment as the promo dark variant but for a plain content section */
+main .section.photo-bg {
+  position: relative;
+  color: #fff;
+}
+
+main .section.photo-bg h1,
+main .section.photo-bg h2,
+main .section.photo-bg h3,
+main .section.photo-bg p {
+  color: inherit;
+}
+
+/* the authored image (a lone <div><img></div>) gets flattened into the first
+   <p> of the section's default-content-wrapper alongside the heading/intro
+   text — absolutely position just that <p> so it fills the section (skipping
+   the wrapper's own side padding, since the wrapper itself stays static and
+   is not the containing block), while its sibling heading/paragraph stay in
+   normal flow and get lifted above it with z-index */
+main .section.photo-bg .default-content-wrapper > p:first-child {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  margin: 0;
+}
+
+main .section.photo-bg .default-content-wrapper > p:first-child picture,
+main .section.photo-bg .default-content-wrapper > p:first-child img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+main .section.photo-bg .default-content-wrapper > :not(p:first-child) {
+  position: relative;
+  z-index: 1;
+}
+
+main .section.photo-bg > div:not(.default-content-wrapper) {
+  position: relative;
+  z-index: 1;
+}

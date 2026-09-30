@@ -34,19 +34,41 @@
   font-size: 0.6em;
 }
 
-.promo-content .button-container {
-  display: inline-block;
-  margin-right: 12px;
+.promo-content .button-wrapper {
+  display: inline-flex;
+  margin: 0 12px 12px 0;
 }
 
-/* dark: solid dark background, image bleeds to the block edge (no card inset) */
+/* dark: full-bleed background image with the text panel overlaid on top
+   (vertically centered), not a side-by-side split — at every breakpoint */
 .promo.dark {
+  position: relative;
+  display: block;
+  height: 580px;
   background-color: var(--surface-dark-color);
   color: #fff;
 }
 
+.promo.dark .promo-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
 .promo.dark .promo-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 0;
+}
+
+.promo.dark .promo-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
 }
 
 .promo.dark .promo-content h2,
@@ -101,19 +123,8 @@
   .promo:not(.dark) .promo-content {
     padding: 0;
   }
+}
 
-  .promo.dark .promo-media {
-    flex: 0 0 55%;
-    align-self: stretch;
-  }
-
-  .promo.dark .promo-media img {
-    height: 100%;
-    min-height: 420px;
-  }
-
-  .promo.dark .promo-content {
-    flex: 1;
-    padding: 48px var(--container-padding);
-  }
+.promo.dark .promo-content {
+  padding: 40px var(--container-padding);
 }
