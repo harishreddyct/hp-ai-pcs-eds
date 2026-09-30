@@ -3,10 +3,10 @@
  * @param {Element} block The promo block element
  */
 export default function decorate(block) {
-  const picture = block.querySelector('picture');
-  const mediaWrapper = picture ? picture.closest(':scope > div > div') : null;
-  if (mediaWrapper) mediaWrapper.parentElement.classList.add('promo-media');
+  const rows = [...block.children];
+  const mediaRow = rows.find((row) => row.querySelector('picture'));
+  const contentRow = rows.find((row) => row !== mediaRow);
 
-  const textWrapper = [...block.children].find((row) => row !== mediaWrapper?.parentElement);
-  if (textWrapper) textWrapper.firstElementChild?.classList.add('promo-content');
+  if (mediaRow) mediaRow.firstElementChild?.classList.add('promo-media');
+  if (contentRow) contentRow.firstElementChild?.classList.add('promo-content');
 }

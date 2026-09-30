@@ -34,14 +34,6 @@
     flex: 1;
     order: unset;
   }
-
-  .columns.alternating > div + div {
-    margin-top: 64px;
-  }
-
-  .columns.alternating > div:nth-child(even) > .columns-img-col {
-    order: 1;
-  }
 }
 
 /* footer-nav: link columns, no image handling, top-aligned at every width */

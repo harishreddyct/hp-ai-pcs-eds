@@ -5,15 +5,14 @@
  * @param {Element} block The hero block element
  */
 export default function decorate(block) {
-  const picture = block.querySelector('picture');
-  const mediaWrapper = picture ? picture.closest(':scope > div > div') : null;
-  if (mediaWrapper) mediaWrapper.parentElement.classList.add('hero-media');
+  const rows = [...block.children];
+  const mediaRow = rows.find((row) => row.querySelector('picture'));
+  if (mediaRow) mediaRow.firstElementChild?.classList.add('hero-media');
 
   const h1 = block.querySelector('h1');
   if (!h1) return;
-  const content = h1.closest(':scope > div > div');
-  if (!content) return;
-  content.parentElement.classList.add('hero-content');
+  const content = h1.parentElement;
+  content.classList.add('hero-content');
 
   const badges = document.createElement('div');
   badges.className = 'hero-badges';

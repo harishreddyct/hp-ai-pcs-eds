@@ -83,3 +83,26 @@
 .cards.product .cards-card-body h3 {
   margin-top: 0;
 }
+
+/* feature: flat (no border/bg), landscape image, heading + copy, no CTA */
+.cards.feature > ul {
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+
+.cards.feature > ul > li {
+  border: none;
+  background: none;
+}
+
+.cards.feature .cards-card-image img {
+  aspect-ratio: 3 / 2;
+  border-radius: 12px;
+}
+
+.cards.feature .cards-card-body {
+  margin-left: 0;
+}
+
+.cards.feature .cards-card-body h3 {
+  margin-top: 16px;
+}

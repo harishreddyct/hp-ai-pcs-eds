@@ -4,38 +4,24 @@
 }
 
 .hero {
-  position: relative;
   display: flex;
-  align-items: center;
-  min-height: 420px;
-  padding: 48px var(--container-padding);
-  overflow: hidden;
+  flex-direction: column;
 }
 
 .hero .hero-media {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
+  order: 0;
+  line-height: 0;
 }
 
-.hero .hero-media picture,
 .hero .hero-media img {
   width: 100%;
-  height: 100%;
+  height: 320px;
   object-fit: cover;
 }
 
-.hero .hero-media::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgb(0 0 0 / 55%) 0%, rgb(0 0 0 / 15%) 65%, rgb(0 0 0 / 0%) 100%);
-}
-
 .hero-content {
-  position: relative;
-  max-width: 680px;
-  color: #fff;
+  order: 1;
+  padding: 32px var(--container-padding) 40px;
 }
 
 .hero-content .hero-eyebrow {
@@ -49,10 +35,10 @@
 
 .hero-content h1 {
   margin: 0 0 16px;
-  color: #fff;
 }
 
 .hero-content .hero-subtitle {
+  max-width: 480px;
   margin: 0 0 24px;
   font-size: 18px;
   font-weight: 500;
@@ -61,19 +47,19 @@
 
 .hero-badges {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 
 .hero .hero-badges img {
-  height: 32px;
+  height: 40px;
   width: auto;
 }
 
 @media (width >= 768px) {
-  .hero {
-    min-height: 480px;
-    padding: 56px var(--container-padding);
+  .hero .hero-media img {
+    height: 420px;
   }
 
   .hero-content .hero-eyebrow {
@@ -88,8 +74,27 @@
 
 @media (width >= 1200px) {
   .hero {
-    min-height: 560px;
-    padding: 64px var(--container-padding);
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .hero .hero-media {
+    order: 1;
+    flex: 0 0 48%;
+  }
+
+  .hero .hero-media img {
+    height: 100%;
+    min-height: 480px;
+  }
+
+  .hero-content {
+    order: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 56px var(--container-padding);
   }
 
   .hero-content .hero-eyebrow {
