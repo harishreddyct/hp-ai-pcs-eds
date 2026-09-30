@@ -25,3 +25,61 @@
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
+
+/* benefits: icon + text, no border/image treatment */
+.cards.benefits > ul {
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.cards.benefits > ul > li {
+  border: none;
+  background: none;
+}
+
+.cards.benefits .cards-card-image {
+  width: 48px;
+}
+
+.cards.benefits .cards-card-image img {
+  aspect-ratio: auto;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.cards.benefits .cards-card-body h3 {
+  margin-top: 16px;
+  font-size: var(--heading-font-size-xs);
+}
+
+/* portfolio: taller image, secondary "Learn" link promoted to button */
+.cards.portfolio .cards-card-image img {
+  aspect-ratio: 3 / 4;
+}
+
+.cards.portfolio .cards-card-body h3 {
+  margin-top: 0;
+}
+
+/* product: image on light background, contained not cropped */
+.cards.product > ul {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.cards.product > ul > li {
+  border: none;
+  background-color: var(--light-color);
+}
+
+.cards.product .cards-card-image {
+  padding: 24px;
+}
+
+.cards.product .cards-card-image img {
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+}
+
+.cards.product .cards-card-body h3 {
+  margin-top: 0;
+}

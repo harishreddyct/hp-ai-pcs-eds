@@ -1,20 +1,32 @@
 footer {
   background-color: var(--light-color);
   font-size: var(--body-font-size-xs);
+  color: var(--dark-color);
 }
 
 footer .footer > div {
   margin: auto;
-  max-width: 1200px;
-  padding: 40px 24px 24px;
+  max-width: var(--container-max-width);
+  padding: 40px var(--container-padding) 24px;
 }
 
 footer .footer p {
   margin: 0;
 }
 
-@media (width >= 900px) {
-  footer .footer > div {
-    padding: 40px 32px 24px;
-  }
+footer .footer .section + .section {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-color);
 }
+
+footer .footer .section.legal a {
+  margin-right: 16px;
+  white-space: nowrap;
+}
+
+footer .footer .section.copyright p {
+  margin-top: 16px;
+  color: var(--dark-color);
+}
+

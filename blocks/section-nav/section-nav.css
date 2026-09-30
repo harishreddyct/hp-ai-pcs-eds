@@ -1,0 +1,57 @@
+.section-nav-container .section-nav-wrapper {
+  max-width: unset;
+  margin: 0;
+  padding: 0;
+  position: sticky;
+  top: var(--nav-height);
+  z-index: 2;
+  background-color: var(--background-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.section-nav-wrapper > .section-nav {
+  max-width: var(--container-max-width);
+  margin: auto;
+  padding: 0 var(--container-padding);
+}
+
+.section-nav > div > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  overflow-x: auto;
+}
+
+.section-nav ul {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 14px 0;
+  white-space: nowrap;
+}
+
+.section-nav ul li {
+  margin: 0;
+}
+
+.section-nav ul a {
+  color: var(--text-color);
+  font-size: var(--body-font-size-s);
+  font-weight: 500;
+}
+
+.section-nav ul a:hover {
+  color: var(--link-color);
+  text-decoration: underline;
+}
+
+.section-nav .button-container {
+  flex: none;
+  margin: 0;
+}
+
+.section-nav .button {
+  padding: 0.4em 1em;
+}

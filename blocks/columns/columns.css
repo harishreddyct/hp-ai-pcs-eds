@@ -19,6 +19,10 @@
   display: block;
 }
 
+.columns > div + div {
+  margin-top: 40px;
+}
+
 @media (width >= 900px) {
   .columns > div {
     align-items: center;
@@ -29,5 +33,44 @@
   .columns > div > div {
     flex: 1;
     order: unset;
+  }
+
+  .columns.alternating > div + div {
+    margin-top: 64px;
+  }
+
+  .columns.alternating > div:nth-child(even) > .columns-img-col {
+    order: 1;
+  }
+}
+
+/* footer-nav: link columns, no image handling, top-aligned at every width */
+.columns.footer-nav > div {
+  flex-direction: column;
+  gap: 24px;
+}
+
+.columns.footer-nav h3 {
+  margin: 0 0 12px;
+  font-size: var(--body-font-size-s);
+}
+
+.columns.footer-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.columns.footer-nav a {
+  color: inherit;
+}
+
+@media (width >= 900px) {
+  .columns.footer-nav > div {
+    flex-direction: row;
+    align-items: start;
   }
 }
