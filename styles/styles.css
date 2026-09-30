@@ -378,3 +378,14 @@ main .section.photo-bg > div:not(.default-content-wrapper) {
   position: relative;
   z-index: 1;
 }
+
+@media (width >= 768px) {
+  main .section.photo-bg {
+    height: 640px;
+  }
+
+  main .section.photo-bg .default-content-wrapper > :not(p:first-child),
+  main .section.photo-bg > div:not(.default-content-wrapper) {
+    max-width: 50%;
+  }
+}

@@ -128,3 +128,9 @@
 .promo.dark .promo-content {
   padding: 40px var(--container-padding);
 }
+
+@media (width >= 768px) {
+  .promo.dark .promo-content {
+    max-width: 50%;
+  }
+}
