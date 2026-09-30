@@ -74,6 +74,29 @@ literally HP's `--font` fallback value.
 11. **FAQs** (`#faqs`) — 10 question/answer pairs (native accordion) +
     footnote/disclaimer small print.
 
+## Correction: Phase 6 visual validation caught real architecture mistakes
+
+Playwright tooling (`tools/playwright/validate.js`) was added after initial
+build and used to screenshot the real reference. That surfaced three
+mistakes made without ever having seen the reference rendered:
+
+1. **Hero** was built full-bleed with a dark gradient scrim over the photo
+   and white overlay text. The real reference is a plain white/light
+   split panel (dark text, no scrim) with the image on the side/top.
+2. **Promo** (HP IQ/Security/Business-ready/Other-laptops) was built as
+   4× full-bleed dark-overlay banners. Only HP IQ actually is that; the
+   other three are light-background split panels with a rounded, inset
+   product image.
+3. **"Keep business moving"** was built as 4 alternating image/text rows.
+   The reference is a flat 4-up grid (image on top, heading + paragraph
+   below), no alternation.
+
+All three are fixed in the current build (see `component-registry.md`).
+This is recorded here because it's the concrete example of why this
+skill's "measure, don't eyeball" and "run a browser, don't assume"
+requirements exist — all three were plausible-looking guesses that were
+simply wrong once actually screenshotted.
+
 ## Simplifications vs. the reference (recorded intentionally, not oversights)
 
 - **Global header nav**: HP's real header is a full e-commerce mega-menu
@@ -95,14 +118,26 @@ literally HP's `--font` fallback value.
   mark.
 - **Trademarked badges** (Windows 11 logo, Copilot+ PC badge): user
   confirmed using the real HP-hosted images directly (see conversation).
+- **"Other laptops" diagonal color-block layout**: the reference uses a
+  diagonal white/blue clip-path split for this one promo instance. This
+  build approximates it with the same plain light-panel `promo` layout
+  used for Security/Business-ready rather than authoring a one-off
+  clip-path variant for a single section.
+- **HP IQ button colors**: reference uses a light-gray solid "Watch Video"
+  button; this build uses the site's one blue primary button style for
+  consistency rather than adding a second button color for one CTA.
 
 ## Limitations
 
-No browser/Playwright tool was available in this environment, so Phase 6
-(live visual diff at each breakpoint) could not be performed against a
-rendered screenshot. Typography/color/spacing values above are real,
-measured values read directly from the reference's own delivered CSS
-source (not eyeballed), which is the most reliable substitute available
-here — but side-by-side pixel comparison and Lighthouse were not run
-against a live preview at authoring time. Re-verify visually once the
-site is previewing on `aem.page`.
+Playwright tooling was added (`tools/playwright/validate.js`) and used to
+screenshot both the implementation and the live reference at multiple
+breakpoints — this caught and fixed three real architecture mistakes (see
+above). What it does **not** cover: an exhaustive per-element measurement
+audit (every image/heading/paragraph's computed style diffed
+programmatically at every breakpoint, per this project's
+`visual-validation.md`), real device-width spot-checks beyond a couple of
+widths, scrolled-state chrome measurement, and font-loading verification
+(`document.fonts.check`). Typography/color/container values in this doc
+are real, measured values from the reference's own delivered CSS, not
+eyeballed. Lighthouse has been run against the live site (see final
+report); a full exhaustive measurement pass has not.
