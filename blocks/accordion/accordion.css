@@ -41,9 +41,19 @@
 
 .accordion .accordion-item-body {
   padding: 0 24px 20px;
+  color: var(--dark-color);
 }
 
+/* DA's pipeline unwraps a cell's <p> when it's the only block child (see
+   this project's da-content-silent-failures notes) but preserves it when
+   there are multiple paragraphs — style the container directly so answer
+   text reads correctly either way, and still space out multi-paragraph
+   answers when the wrapper survives */
 .accordion .accordion-item-body p {
-  margin: 0;
-  color: var(--dark-color);
+  margin: 0 0 0.8em;
+  color: inherit;
+}
+
+.accordion .accordion-item-body p:last-child {
+  margin-bottom: 0;
 }
