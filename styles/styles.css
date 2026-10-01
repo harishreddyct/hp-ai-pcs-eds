@@ -330,6 +330,11 @@ main .section.small-print p {
   color: var(--dark-color);
 }
 
+main .section.small-print .accordion summary {
+  color: var(--dark-color);
+  font-weight: 400;
+}
+
 main .section.gray {
   background-color: var(--light-color);
 }
