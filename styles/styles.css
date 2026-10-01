@@ -404,7 +404,10 @@ main .section.photo-bg > div:not(.default-content-wrapper) {
 
 @media (width >= 768px) {
   main .section.photo-bg {
-    height: 640px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 640px;
   }
 
   main .section.photo-bg .default-content-wrapper > p:first-child {
