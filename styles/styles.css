@@ -382,7 +382,7 @@ main .section.photo-bg p {
    normal flow and get lifted above it with z-index */
 main .section.photo-bg .default-content-wrapper > p:first-child {
   position: absolute;
-  inset: 16px;
+  inset: 0;
   z-index: 0;
   margin: 0;
 }
@@ -393,7 +393,6 @@ main .section.photo-bg .default-content-wrapper > p:first-child img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 16px;
 }
 
 main .section.photo-bg .default-content-wrapper > :not(p:first-child) {
@@ -407,10 +406,6 @@ main .section.photo-bg > div:not(.default-content-wrapper) {
 }
 
 @media (width >= 768px) {
-  main .section.photo-bg .default-content-wrapper > p:first-child {
-    inset: 24px 36px;
-  }
-
   main .section.photo-bg .default-content-wrapper > :not(p:first-child) {
     max-width: 50%;
     margin-left: auto;
@@ -438,9 +433,18 @@ main .section.photo-bg > div:not(.default-content-wrapper) {
 }
 
 /* full-screen height on mobile/tablet (inherited from the base rule);
-   only desktop shrinks it down to a compact banner height */
+   only desktop shrinks it down to a compact banner height, with the
+   image inset as a rounded card instead of full-bleed */
 @media (width >= 1200px) {
   main .section.photo-bg {
     min-height: 640px;
+  }
+
+  main .section.photo-bg .default-content-wrapper > p:first-child {
+    inset: 24px 36px;
+  }
+
+  main .section.photo-bg .default-content-wrapper > p:first-child img {
+    border-radius: 16px;
   }
 }
