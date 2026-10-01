@@ -51,7 +51,7 @@
 
 .promo.dark .promo-media {
   position: absolute;
-  inset: 0;
+  inset: 16px;
   z-index: 0;
 }
 
@@ -59,7 +59,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 0;
+  border-radius: 16px;
 }
 
 .promo.dark .promo-content {
@@ -127,6 +127,10 @@
 }
 
 @media (width >= 768px) {
+  .promo.dark .promo-media {
+    inset: 24px 36px;
+  }
+
   .promo.dark .promo-content {
     max-width: 50%;
   }
