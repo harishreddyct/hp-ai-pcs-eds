@@ -384,20 +384,19 @@ main .section.photo-bg > div:not(.default-content-wrapper) {
     height: 640px;
   }
 
-  main .section.photo-bg .default-content-wrapper > :not(p:first-child),
-  main .section.photo-bg > div:not(.default-content-wrapper) {
+  main .section.photo-bg .default-content-wrapper > :not(p:first-child) {
     max-width: 50%;
     margin-left: auto;
     margin-right: 0;
   }
 
-  /* a block's own wrapper div sits directly in the section (and so still
-     carries the section's own side padding), while default-content-wrapper's
-     children don't carry a second layer of it — cancel it here so both
-     land on the same right edge instead of a block's own padding making its
-     column slightly narrower */
+  /* a block's own wrapper div sits directly in the section, one level
+     higher than default-content-wrapper's children — its right inset
+     comes from margin here instead of the padding default-content-wrapper
+     relies on, so both still land on the same right edge */
   main .section.photo-bg > div:not(.default-content-wrapper) {
-    padding-left: 0;
-    padding-right: 0;
+    max-width: calc(50% - var(--container-padding));
+    margin-left: auto;
+    margin-right: var(--container-padding);
   }
 }
