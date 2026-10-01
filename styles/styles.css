@@ -387,5 +387,6 @@ main .section.photo-bg > div:not(.default-content-wrapper) {
   main .section.photo-bg .default-content-wrapper > :not(p:first-child),
   main .section.photo-bg > div:not(.default-content-wrapper) {
     max-width: 50%;
+    margin-left: auto;
   }
 }
