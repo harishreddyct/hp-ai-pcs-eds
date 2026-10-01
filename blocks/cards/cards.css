@@ -126,9 +126,23 @@
   margin-top: 0;
 }
 
-/* feature: flat (no border/bg), landscape image, heading + copy, no CTA */
+/* feature: flat (no border/bg), landscape image, heading + copy, no CTA.
+   Reference uses a stepped grid (1 col mobile, 2 tablet, 4 desktop), not
+   a fluid auto-fit track — matched here rather than left fluid. */
 .cards.feature > ul {
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: 1fr;
+}
+
+@media (width >= 768px) {
+  .cards.feature > ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (width >= 1200px) {
+  .cards.feature > ul {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
 .cards.feature > ul > li {
