@@ -388,5 +388,16 @@ main .section.photo-bg > div:not(.default-content-wrapper) {
   main .section.photo-bg > div:not(.default-content-wrapper) {
     max-width: 50%;
     margin-left: auto;
+    margin-right: 0;
+  }
+
+  /* a block's own wrapper div sits directly in the section (and so still
+     carries the section's own side padding), while default-content-wrapper's
+     children don't carry a second layer of it — cancel it here so both
+     land on the same right edge instead of a block's own padding making its
+     column slightly narrower */
+  main .section.photo-bg > div:not(.default-content-wrapper) {
+    padding-left: 0;
+    padding-right: 0;
   }
 }
