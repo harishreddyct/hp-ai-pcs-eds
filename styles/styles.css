@@ -420,6 +420,14 @@ main .section.photo-bg > div:not(.default-content-wrapper) {
     margin-right: 0;
   }
 
+  /* the image is inset 24px from the section's own top/bottom edge; give
+     the real content a matching (and slightly larger, for breathing room)
+     vertical margin so it can never run past the image's edge even when
+     content is tall enough to define the section's own height */
+  main .section.photo-bg .default-content-wrapper h2 {
+    margin-top: 40px;
+  }
+
   /* a block's own wrapper div sits directly in the section, one level
      higher than default-content-wrapper's children — its right inset
      comes from margin here instead of the padding default-content-wrapper
@@ -428,5 +436,6 @@ main .section.photo-bg > div:not(.default-content-wrapper) {
     max-width: calc(50% - var(--container-padding));
     margin-left: auto;
     margin-right: var(--container-padding);
+    margin-bottom: 40px;
   }
 }
