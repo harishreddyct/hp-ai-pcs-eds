@@ -26,17 +26,23 @@
   object-fit: cover;
 }
 
-/* benefits: icon + text, no border/image treatment */
+/* benefits: each item is a full-width row — narrow icon column (left) +
+   wide text column (right), stacked, not a side-by-side card grid */
 .cards.benefits > ul {
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: 1fr;
+  gap: 32px;
 }
 
 .cards.benefits > ul > li {
+  display: flex;
+  align-items: center;
+  gap: 24px;
   border: none;
   background: none;
 }
 
 .cards.benefits .cards-card-image {
+  flex: none;
   width: 48px;
 }
 
@@ -47,9 +53,20 @@
   object-fit: contain;
 }
 
+.cards.benefits .cards-card-body {
+  flex: 1;
+  margin: 0;
+}
+
 .cards.benefits .cards-card-body h3 {
   margin-top: 16px;
   font-size: var(--heading-font-size-xs);
+}
+
+@media (width >= 768px) {
+  .cards.benefits .cards-card-image {
+    width: 96px;
+  }
 }
 
 /* portfolio: image kept at its native 1040/898 ratio (no cropping), "Learn" link

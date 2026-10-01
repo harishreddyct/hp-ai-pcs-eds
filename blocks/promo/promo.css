@@ -69,6 +69,7 @@
   flex-direction: column;
   justify-content: center;
   height: 100%;
+  padding: 40px var(--container-padding);
 }
 
 .promo.dark .promo-content h2,
@@ -123,10 +124,6 @@
   .promo:not(.dark) .promo-content {
     padding: 0;
   }
-}
-
-.promo.dark .promo-content {
-  padding: 40px var(--container-padding);
 }
 
 @media (width >= 768px) {
