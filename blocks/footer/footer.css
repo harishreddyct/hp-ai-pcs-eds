@@ -1,7 +1,7 @@
 footer {
-  background-color: var(--surface-dark-color);
+  background-color: var(--light-color);
   font-size: var(--body-font-size-xs);
-  color: #fff;
+  color: var(--dark-color);
 }
 
 footer .footer a:any-link {
@@ -21,7 +21,7 @@ footer .footer p {
 footer .footer .section + .section {
   margin-top: 32px;
   padding-top: 24px;
-  border-top: 1px solid rgb(255 255 255 / 20%);
+  border-top: 1px solid var(--border-color);
 }
 
 footer .footer .section.legal a {
@@ -42,11 +42,11 @@ footer .footer .footer-nav > div {
 }
 
 footer .footer .footer-nav > div > div {
-  border-top: 1px solid rgb(255 255 255 / 20%);
+  border-top: 1px solid var(--border-color);
 }
 
 footer .footer .footer-nav > div > div:last-child {
-  border-bottom: 1px solid rgb(255 255 255 / 20%);
+  border-bottom: 1px solid var(--border-color);
 }
 
 footer .footer .footer-nav h3 {

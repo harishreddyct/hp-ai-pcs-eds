@@ -330,6 +330,10 @@ main .section.small-print p {
   color: var(--dark-color);
 }
 
+main .section.gray {
+  background-color: var(--light-color);
+}
+
 main .section.dark {
   background-color: var(--surface-dark-color);
   margin: 0;
