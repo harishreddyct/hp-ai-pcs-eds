@@ -1,9 +1,14 @@
 .accordion {
-  border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .accordion details {
-  border-bottom: 1px solid var(--border-color);
+  background-color: #fff;
+  border-radius: 12px;
+  color: var(--text-color);
+  overflow: hidden;
 }
 
 .accordion summary {
@@ -11,7 +16,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 20px 4px;
+  padding: 20px 24px;
   font-size: var(--heading-font-size-xs);
   font-weight: 500;
   cursor: pointer;
@@ -35,7 +40,7 @@
 }
 
 .accordion .accordion-item-body {
-  padding: 0 4px 20px;
+  padding: 0 24px 20px;
 }
 
 .accordion .accordion-item-body p {

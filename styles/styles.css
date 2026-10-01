@@ -330,6 +330,19 @@ main .section.small-print p {
   color: var(--dark-color);
 }
 
+main .section.dark {
+  background-color: var(--surface-dark-color);
+  margin: 0;
+  padding: 40px 0;
+  color: #fff;
+}
+
+main .section.dark h1,
+main .section.dark h2,
+main .section.dark h3 {
+  color: inherit;
+}
+
 main .section.no-margin {
   margin: 0;
 }
