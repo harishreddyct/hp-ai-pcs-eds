@@ -360,6 +360,10 @@ main .section.no-margin {
    same treatment as the promo dark variant but for a plain content section */
 main .section.photo-bg {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
   color: #fff;
 }
 
@@ -403,13 +407,6 @@ main .section.photo-bg > div:not(.default-content-wrapper) {
 }
 
 @media (width >= 768px) {
-  main .section.photo-bg {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: 640px;
-  }
-
   main .section.photo-bg .default-content-wrapper > p:first-child {
     inset: 24px 36px;
   }
@@ -437,5 +434,13 @@ main .section.photo-bg > div:not(.default-content-wrapper) {
     margin-left: auto;
     margin-right: var(--container-padding);
     margin-bottom: 40px;
+  }
+}
+
+/* full-screen height on mobile/tablet (inherited from the base rule);
+   only desktop shrinks it down to a compact banner height */
+@media (width >= 1200px) {
+  main .section.photo-bg {
+    min-height: 640px;
   }
 }
