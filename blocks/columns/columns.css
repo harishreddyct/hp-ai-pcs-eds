@@ -23,7 +23,7 @@
   margin-top: 40px;
 }
 
-@media (width >= 900px) {
+@media (width >= 960px) {
   .columns > div {
     align-items: center;
     flex-direction: unset;

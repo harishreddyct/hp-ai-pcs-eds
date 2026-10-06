@@ -99,7 +99,7 @@ footer .footer .footer-nav ul[hidden] {
   display: none;
 }
 
-@media (width >= 1024px) {
+@media (width >= 960px) {
   footer .footer .footer-nav > div {
     flex-direction: row;
     align-items: start;

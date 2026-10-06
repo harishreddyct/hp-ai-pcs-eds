@@ -30,7 +30,7 @@ header nav[aria-expanded='true'] {
   min-height: 100dvh;
 }
 
-@media (width >= 900px) {
+@media (width >= 960px) {
   header .nav-wrapper {
     position: relative;
   }
@@ -127,7 +127,7 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
   transform: rotate(-45deg);
 }
 
-@media (width >= 900px) {
+@media (width >= 960px) {
   header nav .nav-hamburger {
     display: none;
     visibility: hidden;
@@ -220,7 +220,7 @@ header nav .nav-sections .nav-drop > button[aria-expanded='false'] + ul {
   display: none;
 }
 
-@media (width >= 900px) {
+@media (width >= 960px) {
   header nav .nav-sections {
     display: block;
     visibility: visible;
@@ -309,7 +309,7 @@ header nav .nav-tools .icon img {
   height: 100%;
 }
 
-@media (width >= 900px) {
+@media (width >= 960px) {
   header nav .nav-tools .button-wrapper {
     display: block;
   }
