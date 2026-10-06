@@ -17,7 +17,12 @@ export default function decorate(block) {
   const panel = block.closest('.section-nav-wrapper') || block;
   const list = block.querySelector('ul');
   const links = [...block.querySelectorAll('a[href^="#"]')];
-  const findTarget = (link) => document.querySelector(`[data-id="${link.getAttribute('href').slice(1)}"]`);
+  // the published site turns the "Id" row into the section's id; other
+  // pipelines deliver it as data-id
+  const findTarget = (link) => {
+    const id = decodeURIComponent(link.getAttribute('href').slice(1));
+    return document.getElementById(id) || document.querySelector(`[data-id="${CSS.escape(id)}"]`);
+  };
   // bottom edge of the pinned bar (fixed header offset + bar height)
   const barBottom = () => (parseFloat(getComputedStyle(bar).top) || 0) + bar.offsetHeight;
 
@@ -65,15 +70,34 @@ export default function decorate(block) {
   new ResizeObserver(fit).observe(bar);
   fit();
 
+  // land below the fixed header + this sticky bar, not underneath them.
+  // Lazy images above the target still load (and grow the page) during the
+  // smooth scroll, so re-aim once scrolling settles if the target moved.
+  const scrollToTarget = (target, attempts = 3) => {
+    const top = target.getBoundingClientRect().top + window.scrollY - barBottom();
+    window.scrollTo({ top, behavior: 'smooth' });
+    if (attempts <= 1) return;
+    let timer;
+    const settle = () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        window.removeEventListener('scroll', settle);
+        if (Math.abs(target.getBoundingClientRect().top - barBottom()) > 2) {
+          scrollToTarget(target, attempts - 1);
+        }
+      }, 150);
+    };
+    window.addEventListener('scroll', settle, { passive: true });
+    settle();
+  };
+
   links.forEach((link) => {
     link.addEventListener('click', (event) => {
       const target = findTarget(link);
       if (!target) return;
       event.preventDefault();
       setOpen(false);
-      // land below the fixed header + this sticky bar, not underneath them
-      const top = target.getBoundingClientRect().top + window.scrollY - barBottom();
-      window.scrollTo({ top, behavior: 'smooth' });
+      scrollToTarget(target);
     });
   });
 
