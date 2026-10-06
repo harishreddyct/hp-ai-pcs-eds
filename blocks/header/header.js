@@ -18,15 +18,22 @@ async function fetchNav() {
 }
 
 /**
- * Resolves relative image paths against the fragment URL, not the page URL.
+ * Resolves relative image paths (img src and picture source srcset) against
+ * the fragment URL, not the page URL.
  * @param {Element} root fragment root
  * @param {string} base fragment URL
  */
 function resolveImages(root, base) {
+  const absolute = (url) => (url && !/^(https?:|data:|\/)/.test(url) ? new URL(url, base).href : url);
   root.querySelectorAll('img').forEach((img) => {
-    const src = img.getAttribute('src');
-    if (src && !/^(https?:|data:|\/)/.test(src)) img.src = new URL(src, base).href;
+    img.setAttribute('src', absolute(img.getAttribute('src')));
     img.loading = 'lazy';
+  });
+  root.querySelectorAll('source[srcset]').forEach((source) => {
+    source.setAttribute('srcset', source.getAttribute('srcset').split(',').map((part) => {
+      const [url, ...rest] = part.trim().split(/\s+/);
+      return [absolute(url), ...rest].join(' ');
+    }).join(', '));
   });
 }
 
@@ -41,18 +48,29 @@ function toMaskIcon(img) {
   icon.className = 'nav-icon';
   icon.setAttribute('aria-hidden', 'true');
   icon.style.setProperty('--icon', `url("${img.src}")`);
-  img.replaceWith(icon);
+  (img.closest('picture') || img).replaceWith(icon);
   return icon;
 }
 
-/** Splits a list item into its own text and its direct child list. */
+/**
+ * A list item's own label: its text outside nested lists and links (works
+ * whether the text is a bare text node or wrapped in a <p>).
+ * @param {HTMLLIElement} li list item
+ * @returns {string}
+ */
 function ownText(li) {
-  return [...li.childNodes]
-    .filter((n) => n.nodeType === Node.TEXT_NODE)
-    .map((n) => n.textContent)
-    .join(' ')
-    .replace(/\s+/g, ' ')
-    .trim();
+  const clone = li.cloneNode(true);
+  clone.querySelectorAll('ul, ol, a, picture, img').forEach((el) => el.remove());
+  return clone.textContent.replace(/\s+/g, ' ').trim();
+}
+
+/**
+ * A list item's direct link (bare, or wrapped in a <p>).
+ * @param {HTMLLIElement} li list item
+ * @returns {HTMLAnchorElement|null}
+ */
+function directLink(li) {
+  return li.querySelector(':scope > a, :scope > p > a');
 }
 
 /**
@@ -80,7 +98,7 @@ function buildDrawer(list, id) {
 
   [...list.children].forEach((li) => {
     const sub = li.querySelector(':scope > ul');
-    const link = li.querySelector(':scope > a');
+    const link = directLink(li);
     const img = link && link.querySelector('img');
     if (sub) {
       const heading = document.createElement('p');
@@ -99,7 +117,7 @@ function buildDrawer(list, id) {
       link.className = 'nav-tile';
       const media = document.createElement('span');
       media.className = 'nav-tile-media';
-      media.append(img);
+      media.append(img.closest('picture') || img);
       const title = document.createElement('span');
       title.className = 'nav-tile-title';
       title.textContent = link.textContent.trim();
@@ -270,7 +288,7 @@ export default async function decorate(block) {
     if (toolList) {
       toolList.className = 'nav-tool-list';
       [...toolList.children].forEach((li, i) => {
-        const link = li.querySelector(':scope > a');
+        const link = directLink(li);
         if (!link) return;
         const img = link.querySelector('img');
         const label = img?.alt || link.textContent.trim();
