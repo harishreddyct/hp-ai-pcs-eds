@@ -1,21 +1,14 @@
 /* sticky bar: the section itself must be sticky — the wrapper's containing
  * block is the (bar-height) section, so sticky on the wrapper never engages.
- * Below 960px the EDS header is position: fixed, so pin under it; from 960px
- * the header scrolls away (header.css) and the bar pins at 0, as on the
- * reference. z-index stays below the header (2) so the open mobile header
- * menu paints over the bar. */
+ * The header scrolls away at every width (header.css), so the bar pins at
+ * 0, as on the reference. z-index stays below the header (3) so the open
+ * mobile header menu paints over the bar. */
 main > .section.section-nav-container {
   position: sticky;
-  top: var(--nav-height);
+  top: 0;
   z-index: 1;
   background-color: var(--background-color);
   border-bottom: 1px solid var(--border-color);
-}
-
-@media (width >= 960px) {
-  main > .section.section-nav-container {
-    top: 0;
-  }
 }
 
 .section-nav-container .section-nav-wrapper {
