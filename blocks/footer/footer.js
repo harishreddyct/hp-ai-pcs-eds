@@ -15,15 +15,22 @@ async function fetchFooter() {
 }
 
 /**
- * Resolves relative image paths against the fragment URL, not the page URL.
+ * Resolves relative image paths (img src and picture source srcset) against
+ * the fragment URL, not the page URL.
  * @param {Element} root fragment root
  * @param {string} base fragment URL
  */
 function resolveImages(root, base) {
+  const absolute = (url) => (url && !/^(https?:|data:|\/)/.test(url) ? new URL(url, base).href : url);
   root.querySelectorAll('img').forEach((img) => {
-    const src = img.getAttribute('src');
-    if (src && !/^(https?:|data:|\/)/.test(src)) img.src = new URL(src, base).href;
+    img.setAttribute('src', absolute(img.getAttribute('src')));
     img.loading = 'lazy';
+  });
+  root.querySelectorAll('source[srcset]').forEach((source) => {
+    source.setAttribute('srcset', source.getAttribute('srcset').split(',').map((part) => {
+      const [url, ...rest] = part.trim().split(/\s+/);
+      return [absolute(url), ...rest].join(' ');
+    }).join(', '));
   });
 }
 
@@ -51,9 +58,11 @@ function buildLocale(section, index) {
       const span = document.createElement('span');
       span.textContent = text;
       trigger.append(span);
-    } else if (node.tagName === 'IMG') {
-      node.className = 'footer-locale-flag';
-      trigger.append(node);
+    } else if (node.tagName === 'IMG' || node.tagName === 'PICTURE') {
+      const img = node.tagName === 'IMG' ? node : node.querySelector('img');
+      if (!img) return;
+      img.className = 'footer-locale-flag';
+      trigger.append(img);
     }
   });
 
