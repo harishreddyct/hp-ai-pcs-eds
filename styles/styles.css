@@ -44,7 +44,7 @@
   --container-padding: 16px;
 
   /* nav height */
-  --nav-height: 64px;
+  --nav-height: 65px;
 }
 
 @media (width >= 768px) {
@@ -57,6 +57,13 @@
     --heading-font-size-l: 28px;
     --heading-font-size-m: 28px;
     --heading-font-size-s: 20px;
+  }
+}
+
+@media (width >= 960px) {
+  :root {
+    /* desktop header bar: 54px + 1px border */
+    --nav-height: 55px;
   }
 }
 
@@ -406,7 +413,7 @@ main .section.photo-bg {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 100vh;
+  min-height: 800px;
   color: #fff;
 }
 
@@ -445,7 +452,7 @@ main .section.photo-bg .default-content-wrapper > h2 + p {
    normal flow and get lifted above it with z-index */
 main .section.photo-bg .default-content-wrapper > p:first-child {
   position: absolute;
-  inset: 16px;
+  inset: 0 16px;
   z-index: 0;
   margin: 0;
 }
@@ -478,21 +485,24 @@ main .section.photo-bg > div:not(.default-content-wrapper) {
   z-index: 1;
 }
 
+/* reference card heights: 800px phone, 580px tablet (768-1199), 578px
+   desktop; the card is flush to the section's top/bottom edge and inset
+   16px at the sides below 1200px. Text sits in the right 7/12 of the row
+   (plus one 24px gutter) on tablet, the right half on desktop. */
 @media (width >= 768px) {
-  main .section.photo-bg .default-content-wrapper > p:first-child {
-    inset: 24px 36px;
+  main .section.photo-bg {
+    min-height: 580px;
   }
 
   main .section.photo-bg .default-content-wrapper > :not(p:first-child) {
-    max-width: 50%;
+    max-width: calc(100% * 7 / 12 + 24px);
     margin-left: auto;
     margin-right: 0;
   }
 
-  /* the image is inset 24px from the section's own top/bottom edge; give
-     the real content a matching (and slightly larger, for breathing room)
-     vertical margin so it can never run past the image's edge even when
-     content is tall enough to define the section's own height */
+  /* the card is flush top/bottom; give the real content breathing room so
+     it can never run past the image's edge even when content is tall
+     enough to define the section's own height */
   main .section.photo-bg .default-content-wrapper h2 {
     margin-top: 40px;
   }
@@ -502,16 +512,13 @@ main .section.photo-bg > div:not(.default-content-wrapper) {
      comes from margin here instead of the padding default-content-wrapper
      relies on, so both still land on the same right edge */
   main .section.photo-bg > div:not(.default-content-wrapper) {
-    max-width: calc(50% - var(--container-padding));
+    max-width: calc(100% * 7 / 12 + 24px - var(--container-padding));
     margin-left: auto;
     margin-right: var(--container-padding);
     margin-bottom: 40px;
   }
 }
 
-/* full-screen height on mobile/tablet (inherited from the base rule);
-   only desktop shrinks it down to a compact banner height — the reference
-   card is 578px tall and runs flush to the section's top/bottom edge */
 @media (width >= 1200px) {
   main .section.photo-bg {
     min-height: 578px;
@@ -519,5 +526,13 @@ main .section.photo-bg > div:not(.default-content-wrapper) {
 
   main .section.photo-bg .default-content-wrapper > p:first-child {
     inset: 0 var(--container-padding);
+  }
+
+  main .section.photo-bg .default-content-wrapper > :not(p:first-child) {
+    max-width: 50%;
+  }
+
+  main .section.photo-bg > div:not(.default-content-wrapper) {
+    max-width: calc(50% - var(--container-padding));
   }
 }

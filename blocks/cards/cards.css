@@ -147,7 +147,7 @@
 
 /* portfolio: image kept at its native 1040/898 ratio (phones get the
    reference's 816/600 mobile crop), "Learn" link promoted to primary
-   button, always 3-up above phone width */
+   button, 3-up from 768px */
 .cards.portfolio > ul {
   grid-template-columns: 1fr;
   gap: var(--cards-gutter);
@@ -167,7 +167,7 @@
   margin: calc(var(--cards-space) + 16px) 0 16px;
 }
 
-@media (width >= 440px) {
+@media (width >= 768px) {
   .cards.portfolio > ul {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -203,7 +203,7 @@
   margin: calc(var(--cards-space) + 16px) 0 16px;
 }
 
-@media (width >= 440px) {
+@media (width >= 768px) {
   .cards.product .cards-card-image img {
     aspect-ratio: 1584 / 1138;
   }
@@ -211,22 +211,18 @@
 
 /* feature: flat (no border/bg), image on top, heading + copy, no CTA.
    Reference uses a stepped grid (1 col phone, 2 tablet, 4 desktop), not
-   a fluid auto-fit track — matched here rather than left fluid. */
+   a fluid auto-fit track — matched here rather than left fluid.
+   Phones: HP pads the heading block 30px below (not one 8px step). */
 .cards.feature > ul {
   grid-template-columns: 1fr;
   gap: var(--cards-gutter);
+  margin-top: calc(30px + var(--cards-gutter));
 }
 
-/* phones: HP pads the heading block 30px below (not one 8px step) */
-@media (width < 768px) {
-  .cards.feature > ul {
-    margin-top: calc(30px + var(--cards-gutter));
-  }
-}
-
-@media (width >= 440px) {
+@media (width >= 768px) {
   .cards.feature > ul {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: calc(var(--cards-space) + var(--cards-gutter));
   }
 }
 
@@ -250,7 +246,7 @@
   padding-bottom: var(--cards-space);
 }
 
-@media (width >= 440px) {
+@media (width >= 768px) {
   .cards.feature .cards-card-image img {
     aspect-ratio: 768 / 640;
   }
