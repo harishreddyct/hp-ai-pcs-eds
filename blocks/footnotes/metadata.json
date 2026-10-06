@@ -1,0 +1,16 @@
+{
+  "variantName": "footnotes",
+  "baseBlock": "footnotes",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": "Single collapsible small-print panel (closed by default, +/- toggle) titled Footnotes and Disclaimers; small gray body text with paragraphs and a numbered footnote list containing links.",
+  "contentPattern": "row 1: title (e.g. Footnotes and Disclaimers); row 2: body - disclaimer paragraphs and/or an ordered list of footnote items (may contain links)",
+  "options": [],
+  "memberVariantIds": [],
+  "usage": {
+    "pagesUsing": [
+      "https://www.hp.com/us-en/ai-solutions/next-gen-ai-pcs.html"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-06T05:31:19.692Z"
+  }
+}

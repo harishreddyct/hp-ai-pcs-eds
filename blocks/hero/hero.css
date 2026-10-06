@@ -3,43 +3,55 @@
   padding: 0;
 }
 
+/* The source clips its oversized, slanted image box at the viewport edge */
 .hero {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
+/* Image box is inset by the container gutter on the left and deliberately
+   wider than the viewport on the right (source: c-hp-hero-banner__media) */
 .hero .hero-media {
   order: 0;
+  padding-left: var(--container-padding);
   line-height: 0;
 }
 
+/* The parallelogram shape is baked into the photo; clip-path matches the
+   source's c-hp-hero-banner__media--image polygon for a clean edge */
 .hero .hero-media img {
-  width: 100%;
-  height: 320px;
+  display: block;
+  width: 468px;
+  max-width: none;
+  height: 270px;
   object-fit: cover;
+
+  /* Left-anchored crop keeps the photo's baked slant at the source's
+     mobile position (the source swaps in a separate mobile asset here) */
+  object-position: left center;
+  clip-path: polygon(98.28px 0, 100% 0, 661px 100%, 0 100%);
 }
 
 .hero-content {
   order: 1;
-  padding: 32px var(--container-padding) 40px;
+  padding: 28px var(--container-padding);
 }
 
 .hero-content .hero-eyebrow {
-  margin: 0 0 12px;
+  margin: 0 0 16px;
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
 }
 
 .hero-content h1 {
   margin: 0 0 16px;
+  line-height: 1;
 }
 
 .hero-content .hero-subtitle {
-  max-width: 480px;
-  margin: 0 0 24px;
+  margin: 0 0 16px;
   font-size: 18px;
   font-weight: 500;
   line-height: 24px;
@@ -49,17 +61,31 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
+  margin-top: 36px;
+}
+
+.hero .hero-badges p {
+  margin: 0;
+  line-height: 0;
 }
 
 .hero .hero-badges img {
-  height: 40px;
+  height: 32px;
   width: auto;
 }
 
 @media (width >= 768px) {
   .hero .hero-media img {
-    height: 420px;
+    width: 786px;
+    height: 336px;
+    object-position: center;
+    clip-path: polygon(122.304px 0, 100% 0, 661px 100%, 0 100%);
+  }
+
+  .hero-content {
+    padding-top: 36px;
+    padding-bottom: 36px;
   }
 
   .hero-content .hero-eyebrow {
@@ -76,25 +102,36 @@
   .hero {
     flex-direction: row;
     align-items: stretch;
+    min-height: 500px;
   }
 
-  .hero .hero-media {
-    order: 1;
-    flex: 0 0 48%;
-  }
-
-  .hero .hero-media img {
-    height: 100%;
-    min-height: 480px;
-  }
-
+  /* Text column: 42.66% of the 1680px-capped container's inner width
+     (max 680px incl. 24px right padding), aligned to the container gutter */
   .hero-content {
     order: 0;
-    flex: 1;
+    flex: 0 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 56px var(--container-padding);
+    width: calc(min(680px, (min(100%, var(--container-max-width)) - 2 * var(--container-padding)) * 0.4266) - 24px);
+    padding: 80px 24px 80px max(var(--container-padding), calc((100% - var(--container-max-width)) / 2 + var(--container-padding)));
+  }
+
+  .hero .hero-media {
+    position: relative;
+    order: 1;
+    flex: 1 1 auto;
+    min-width: 0;
+    padding-left: 0;
+  }
+
+  .hero .hero-media img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1101.3px;
+    height: 100%;
+    clip-path: polygon(175px 0, 100% 0, 926.297px 100%, 0 100%);
   }
 
   .hero-content .hero-eyebrow {

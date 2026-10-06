@@ -114,7 +114,7 @@ h6 {
   margin-bottom: 0.25em;
   font-family: var(--heading-font-family);
   font-weight: 500;
-  line-height: 1.1;
+  line-height: 1;
   scroll-margin-top: 120px;
 }
 
@@ -183,18 +183,26 @@ button.button {
   align-items: center;
   justify-content: center;
   max-width: 100%;
+  min-width: 112px;
+  min-height: 48px;
   margin: 0;
-  border: 2px solid transparent;
-  border-radius: 2.4em;
-  padding: 0.5em 1.2em;
-  font: inherit;
-  font-weight: 500;
-  line-height: 1.25;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
   text-decoration: none;
   cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  transition: color 0.3s, background-color 0.3s, border-color 0.3s;
+}
+
+a.button:hover {
+  text-decoration: none;
 }
 
 a.button[aria-disabled="true"],
@@ -242,7 +250,7 @@ a.button.secondary:focus-visible,
 button.button.secondary:hover,
 button.button.secondary:focus-visible {
   border-color: var(--dark-color);
-  background-color: var(--light-color);
+  background-color: rgb(133 133 133 / 10%);
   color: var(--dark-color);
 }
 
@@ -316,6 +324,30 @@ main > .section:first-of-type {
   margin-top: 0;
 }
 
+/* section intro: a paragraph right under a section heading is HP's
+   subtitle-large (photo-bg sections override it with subtitle-regular) */
+main .default-content-wrapper > h2 + p {
+  margin-top: 8px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+@media (width >= 768px) {
+  main .default-content-wrapper > h2 + p {
+    margin-top: 12px;
+    font-size: 20px;
+  }
+}
+
+@media (width >= 1200px) {
+  main .default-content-wrapper > h2 + p {
+    margin-top: 16px;
+    font-size: 24px;
+    line-height: 28px;
+  }
+}
+
 /* section metadata */
 main .section.light,
 main .section.highlight {
@@ -352,9 +384,20 @@ main .section.dark h3 {
   color: inherit;
 }
 
+/* the section's own padding is the reference's top spacing; don't stack
+   the heading's top margin on it */
+main .section.dark .default-content-wrapper > :first-child {
+  margin-top: 0;
+}
+
 main .section.no-margin {
   margin: 0;
 }
+
+main .section.centered .default-content-wrapper {
+  text-align: center;
+}
+
 
 /* photo-bg: full-bleed background image with content overlaid on top,
    same treatment as the promo dark variant but for a plain content section */
@@ -372,6 +415,26 @@ main .section.photo-bg h2,
 main .section.photo-bg h3,
 main .section.photo-bg p {
   color: inherit;
+}
+
+/* photo-bg intro: HP's subtitle-regular */
+main .section.photo-bg .default-content-wrapper > h2 + p {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+@media (width >= 768px) {
+  main .section.photo-bg .default-content-wrapper > h2 + p {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+
+@media (width >= 1200px) {
+  main .section.photo-bg .default-content-wrapper > h2 + p {
+    font-size: 20px;
+    line-height: 24px;
+  }
 }
 
 /* the authored image (a lone <div><img></div>) gets flattened into the first
@@ -399,6 +462,15 @@ main .section.photo-bg .default-content-wrapper > p:first-child img {
 main .section.photo-bg .default-content-wrapper > :not(p:first-child) {
   position: relative;
   z-index: 1;
+}
+
+/* the generic `main > .section > div { margin: auto }` would spread the
+   free height of this flex column around each wrapper; keep them grouped
+   (intro → first row is 24-32px on the reference) and let
+   justify-content center the group */
+main .section.photo-bg > div {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 main .section.photo-bg > div:not(.default-content-wrapper) {
@@ -438,9 +510,14 @@ main .section.photo-bg > div:not(.default-content-wrapper) {
 }
 
 /* full-screen height on mobile/tablet (inherited from the base rule);
-   only desktop shrinks it down to a compact banner height */
+   only desktop shrinks it down to a compact banner height — the reference
+   card is 578px tall and runs flush to the section's top/bottom edge */
 @media (width >= 1200px) {
   main .section.photo-bg {
-    min-height: 640px;
+    min-height: 578px;
+  }
+
+  main .section.photo-bg .default-content-wrapper > p:first-child {
+    inset: 0 var(--container-padding);
   }
 }

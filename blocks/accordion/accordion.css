@@ -1,59 +1,132 @@
+/* Spacing from the heading above to the first card (source: 40 / 64 / 76px);
+   collapses with the heading's own bottom margin so the larger value wins.
+   Needs section-level specificity to beat the global section > div margin */
+main .section > .accordion-wrapper {
+  margin-top: 40px;
+}
+
 .accordion {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
 .accordion details {
   background-color: #fff;
-  border-radius: 12px;
+  border-radius: 16px;
   color: var(--text-color);
   overflow: hidden;
 }
 
 .accordion summary {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 16px;
-  padding: 20px 24px;
-  font-size: var(--heading-font-size-xs);
+  gap: 10px;
+  padding: 16px;
+  font-size: 18px;
   font-weight: 500;
+  line-height: 24px;
   cursor: pointer;
   list-style: none;
+}
+
+/* the question cell may arrive wrapped in a <p>; keep it to one 24px line box */
+.accordion summary > p {
+  margin: 0;
+  font: inherit;
 }
 
 .accordion summary::-webkit-details-marker {
   display: none;
 }
 
+/* thin 18px plus glyph in a 24px box; rotates 45deg into an "x" when open */
 .accordion summary::after {
-  content: '+';
+  content: '';
   flex: none;
-  font-size: 24px;
-  font-weight: 400;
-  line-height: 1;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  margin-right: -1px;
+  background:
+    linear-gradient(currentcolor, currentcolor) center / 18px 1px no-repeat,
+    linear-gradient(currentcolor, currentcolor) center / 1px 18px no-repeat;
+  transition: transform 0.3s ease-out;
 }
 
 .accordion details[open] summary::after {
-  content: '\2212';
+  transform: rotate(45deg);
 }
 
+/* answer: 16px below the question, plus the source's 24px trailing space
+   before the card padding. Answer cells are usually bare text (DA unwraps
+   a lone <p>), so the container carries the type styles */
 .accordion .accordion-item-body {
-  padding: 0 24px 20px;
-  color: var(--dark-color);
+  padding: 0 16px 40px;
+  color: var(--text-color);
+  font-size: 14px;
+  line-height: 24px;
 }
 
-/* DA's pipeline unwraps a cell's <p> when it's the only block child (see
-   this project's da-content-silent-failures notes) but preserves it when
-   there are multiple paragraphs — style the container directly so answer
-   text reads correctly either way, and still space out multi-paragraph
-   answers when the wrapper survives */
 .accordion .accordion-item-body p {
   margin: 0 0 0.8em;
   color: inherit;
+  font-size: inherit;
+  line-height: inherit;
 }
 
 .accordion .accordion-item-body p:last-child {
   margin-bottom: 0;
+}
+
+.accordion details[open] summary {
+  padding-bottom: 16px;
+}
+
+@media (width >= 768px) {
+  main .section > .accordion-wrapper {
+    margin-top: 64px;
+  }
+
+  .accordion {
+    gap: 16px;
+  }
+
+  .accordion summary {
+    gap: 22px;
+    padding: 32px;
+    font-size: 20px;
+  }
+
+  .accordion summary::after {
+    top: 2px;
+    margin-right: 2px;
+  }
+
+  .accordion .accordion-item-body {
+    padding: 0 32px 56px;
+  }
+}
+
+@media (width >= 1200px) {
+  main .section > .accordion-wrapper {
+    margin-top: 76px;
+  }
+
+  .accordion summary {
+    gap: 26px;
+    padding: 36px;
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  .accordion summary::after {
+    top: 4px;
+  }
+
+  .accordion .accordion-item-body {
+    padding: 0 36px 60px;
+    font-size: 16px;
+  }
 }

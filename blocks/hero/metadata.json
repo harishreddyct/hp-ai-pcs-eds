@@ -1,0 +1,16 @@
+{
+  "variantName": "hero",
+  "baseBlock": "hero",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": "Side-by-side split: light content panel (eyebrow, h1, subtitle, row of linked badge images) and a product image; image stacks on top on mobile and sits on the right from 1200px up.",
+  "contentPattern": "1 row: image cell | content cell (optional eyebrow p, h1, subtitle p, p(s) with linked badge images)",
+  "options": [],
+  "memberVariantIds": [],
+  "usage": {
+    "pagesUsing": [
+      "https://www.hp.com/us-en/ai-solutions/next-gen-ai-pcs.html"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-06T05:31:19.630Z"
+  }
+}
