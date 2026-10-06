@@ -10,6 +10,37 @@
  * governing permissions and limitations under the License.
  */
 
+/* fallback while Roboto (fonts.css) loads: local Arial carrying the same
+   Forma DJR line metrics, so the swap doesn't shift the layout */
+@font-face {
+  font-family: roboto-fallback;
+  src: local('Arial'), local('Arimo'), local('Liberation Sans');
+  size-adjust: 100%;
+  ascent-override: 95%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+}
+
+/* Roboto → Forma DJR width correction: Forma Micro is relatively wider at
+   small sizes and narrower at display sizes. Fitted on the reference
+   page's own text — regular copy (12-20px) and medium headings / intros
+   (20-72px) separately — this keeps text widths within ~1% of Forma.
+   Set per element (letter-spacing inherits as a fixed length) at zero
+   specificity so any explicit letter-spacing still wins. */
+:where(body, body *) {
+  letter-spacing: calc(1.226px - 0.0735em);
+}
+
+:where(h1, h2, h3, h4, h5, h6, .default-content-wrapper > h2 + p),
+:where(h1, h2, h3, h4, h5, h6, .default-content-wrapper > h2 + p) * {
+  letter-spacing: calc(0.907px - 0.0493em);
+}
+
+/* the reference's bold is synthesized from the regular face: wider, not taller */
+:where(strong, b) {
+  letter-spacing: calc(1.226px - 0.0425em);
+}
+
 :root {
   /* colors (measured from the reference's own theme CSS) */
   --background-color: #fff;
@@ -22,9 +53,11 @@
   --surface-dark-alt-color: #292929;
   --border-color: #e8e8e8;
 
-  /* fonts: forma-djr-micro is HP's licensed font; Arial is HP's own documented fallback */
-  --body-font-family: arial, sans-serif;
-  --heading-font-family: arial, sans-serif;
+  /* fonts: HP's licensed Forma DJR is replaced by Roboto tuned to its
+     metrics (styles/fonts.css); roboto-fallback holds the same metrics on
+     local Arial until Roboto has loaded */
+  --body-font-family: roboto, roboto-fallback, sans-serif;
+  --heading-font-family: roboto, roboto-fallback, sans-serif;
 
   /* body sizes */
   --body-font-size-m: 18px;
@@ -446,7 +479,10 @@ main .section.no-margin {
   margin: 0;
 }
 
+/* the reference insets centered heading + intro by one more container
+   padding on each side (16 / 32 / 36px) */
 main .section.centered .default-content-wrapper {
+  padding: 0 calc(2 * var(--container-padding));
   text-align: center;
 }
 
