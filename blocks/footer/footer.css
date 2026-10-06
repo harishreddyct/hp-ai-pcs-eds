@@ -80,6 +80,12 @@ footer .footer-locale-trigger {
   text-align: start;
 }
 
+/* "Country/Region" + current country: 14/20px inside the 12px trigger */
+footer .footer-locale-trigger span {
+  font-size: 14px;
+  line-height: 20px;
+}
+
 footer .footer-locale-flag {
   display: block;
   width: 17px;
