@@ -1,0 +1,33 @@
+{
+  "variantName": "cards",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": "Grid of tiles (ul/li). benefits: icon + bold-lead text rows over a dark photo background; portfolio: 3 image tiles with title, copy and Learn button; product: 2 centered product tiles with image, name and button; feature: 4-up image-top tiles with landscape images and no CTA.",
+  "contentPattern": "N rows, one card per row: image cell | body cell (heading/text/optional CTA link); benefits uses icon image | text with bold lead-in",
+  "options": [
+    {
+      "class": "benefits",
+      "label": "Benefits"
+    },
+    {
+      "class": "portfolio",
+      "label": "Portfolio"
+    },
+    {
+      "class": "product",
+      "label": "Product"
+    },
+    {
+      "class": "feature",
+      "label": "Feature"
+    }
+  ],
+  "memberVariantIds": [],
+  "usage": {
+    "pagesUsing": [
+      "https://www.hp.com/us-en/ai-solutions/next-gen-ai-pcs.html"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-06T05:31:19.654Z"
+  }
+}

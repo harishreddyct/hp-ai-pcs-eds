@@ -1,0 +1,21 @@
+{
+  "variantName": "promo",
+  "baseBlock": "promo",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": "Split banner: image + heading, copy and 1-2 CTAs side by side; image side follows authored row order. Default: light background with rounded contained image and dark text. dark: solid dark background, image bleeds to the block edge, white text.",
+  "contentPattern": "2 rows: media row (image) and content row (optional logo image, h2, p, optional em note, 1-2 CTA links); the first row renders on the left",
+  "options": [
+    {
+      "class": "dark",
+      "label": "Dark"
+    }
+  ],
+  "memberVariantIds": [],
+  "usage": {
+    "pagesUsing": [
+      "https://www.hp.com/us-en/ai-solutions/next-gen-ai-pcs.html"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-06T05:31:19.666Z"
+  }
+}

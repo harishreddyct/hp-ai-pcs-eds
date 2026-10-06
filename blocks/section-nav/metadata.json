@@ -1,0 +1,16 @@
+{
+  "variantName": "section-nav",
+  "baseBlock": "section-nav",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": "Sticky in-page jump-link bar with a right-aligned CTA button; links smooth-scroll to sections carrying a Section Metadata Id.",
+  "contentPattern": "row 1: list of #anchor links (targets match Section Metadata Id values); row 2: CTA link",
+  "options": [],
+  "memberVariantIds": [],
+  "usage": {
+    "pagesUsing": [
+      "https://www.hp.com/us-en/ai-solutions/next-gen-ai-pcs.html"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-06T05:31:19.641Z"
+  }
+}
