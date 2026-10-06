@@ -312,7 +312,10 @@ footer .footer-copyright {
     padding: 0;
   }
 
+  /* the 5-column grid leaves the icon column ~160px at 960px: wrap the six
+     icons instead of letting them run past the page edge */
   footer .footer-social {
+    flex-wrap: wrap;
     gap: 16px;
   }
 

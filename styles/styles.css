@@ -359,8 +359,39 @@ main .default-content-wrapper > h2 + p {
 main .section.light,
 main .section.highlight {
   background-color: var(--light-color);
+}
+
+/* HP background-container spacing (measured on the reference): content
+   starts 46 / 34 / 44px below the section edge and ends 72 / 74 / 76px
+   above it (phone / tablet / desktop). The padding is the whole top
+   spacing, so the first element's own top margin is dropped. */
+main .section.light,
+main .section.highlight,
+main .section.centered {
   margin: 0;
-  padding: 40px 0;
+  padding: 46px 0 72px;
+}
+
+main .section.light .default-content-wrapper > :first-child,
+main .section.highlight .default-content-wrapper > :first-child,
+main .section.centered .default-content-wrapper > :first-child {
+  margin-top: 0;
+}
+
+@media (width >= 768px) {
+  main .section.light,
+  main .section.highlight,
+  main .section.centered {
+    padding: 34px 0 74px;
+  }
+}
+
+@media (width >= 1200px) {
+  main .section.light,
+  main .section.highlight,
+  main .section.centered {
+    padding: 44px 0 76px;
+  }
 }
 
 main .section.small-print p {
@@ -378,11 +409,25 @@ main .section.gray {
   background-color: var(--light-color);
 }
 
+/* dark (FAQ) container: 24 / 34 / 45px above the content, 38 / 74 / 83px
+   below it on the reference */
 main .section.dark {
   background-color: var(--surface-dark-color);
   margin: 0;
-  padding: 40px 0;
+  padding: 24px 0 38px;
   color: #fff;
+}
+
+@media (width >= 768px) {
+  main .section.dark {
+    padding: 34px 0 74px;
+  }
+}
+
+@media (width >= 1200px) {
+  main .section.dark {
+    padding: 45px 0 83px;
+  }
 }
 
 main .section.dark h1,
@@ -466,16 +511,24 @@ main .section.photo-bg .default-content-wrapper > p:first-child img {
   border-radius: 16px;
 }
 
+/* text column geometry follows the reference's grid: on phones the heading
+   and intro sit 12px in from the container edge and a block (benefit rows)
+   2px in; the wider layouts below place both inside the card's right side */
 main .section.photo-bg .default-content-wrapper > :not(p:first-child) {
   position: relative;
   z-index: 1;
+  margin-left: 12px;
+  margin-right: 2px;
 }
 
 /* the generic `main > .section > div { margin: auto }` would spread the
    free height of this flex column around each wrapper; keep them grouped
    (intro → first row is 24-32px on the reference) and let
-   justify-content center the group */
+   justify-content center the group. Their auto side margins would also
+   shrink them to their content in this flex column, so give them the full
+   container width explicitly (the column percentages depend on it). */
 main .section.photo-bg > div {
+  width: calc(100% - 2 * var(--container-padding));
   margin-top: 0;
   margin-bottom: 0;
 }
@@ -485,18 +538,27 @@ main .section.photo-bg > div:not(.default-content-wrapper) {
   z-index: 1;
 }
 
+main .section.photo-bg > div:not(.default-content-wrapper) > div {
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
 /* reference card heights: 800px phone, 580px tablet (768-1199), 578px
    desktop; the card is flush to the section's top/bottom edge and inset
-   16px at the sides below 1200px. Text sits in the right 7/12 of the row
-   (plus one 24px gutter) on tablet, the right half on desktop. */
+   16px at the sides below 1200px.
+   Text column, in % of the container's content box (reference grid):
+   tablet — a 70%-wide cell offset by a third of the row, heading 42px in
+   from the cell edge; desktop — the right half, heading 52px in. Benefit
+   rows start 20px (tablet) / 40px (desktop) left of the heading so the
+   icon column lines up under it. */
 @media (width >= 768px) {
   main .section.photo-bg {
     min-height: 580px;
   }
 
   main .section.photo-bg .default-content-wrapper > :not(p:first-child) {
-    max-width: calc(100% * 7 / 12 + 24px);
-    margin-left: auto;
+    max-width: calc(70% - 68px);
+    margin-left: calc(100% / 3 + 42px);
     margin-right: 0;
   }
 
@@ -507,15 +569,16 @@ main .section.photo-bg > div:not(.default-content-wrapper) {
     margin-top: 40px;
   }
 
-  /* a block's own wrapper div sits directly in the section, one level
-     higher than default-content-wrapper's children — its right inset
-     comes from margin here instead of the padding default-content-wrapper
-     relies on, so both still land on the same right edge */
+  /* a block's wrapper keeps the same centered container box as
+     default-content-wrapper; the block inside it takes the column */
   main .section.photo-bg > div:not(.default-content-wrapper) {
-    max-width: calc(100% * 7 / 12 + 24px - var(--container-padding));
-    margin-left: auto;
-    margin-right: var(--container-padding);
     margin-bottom: 40px;
+  }
+
+  main .section.photo-bg > div:not(.default-content-wrapper) > div {
+    max-width: calc(70% - 48px);
+    margin-left: calc(100% / 3 + 22px);
+    margin-right: 0;
   }
 }
 
@@ -524,15 +587,18 @@ main .section.photo-bg > div:not(.default-content-wrapper) {
     min-height: 578px;
   }
 
+  /* the card matches the container's content box (capped at the max width) */
   main .section.photo-bg .default-content-wrapper > p:first-child {
-    inset: 0 var(--container-padding);
+    inset: 0 max(var(--container-padding), calc((100% - var(--container-max-width)) / 2));
   }
 
   main .section.photo-bg .default-content-wrapper > :not(p:first-child) {
-    max-width: 50%;
+    max-width: calc(50% - 88px);
+    margin-left: calc(50% + 52px);
   }
 
-  main .section.photo-bg > div:not(.default-content-wrapper) {
-    max-width: calc(50% - var(--container-padding));
+  main .section.photo-bg > div:not(.default-content-wrapper) > div {
+    max-width: calc(50% - 48px);
+    margin-left: calc(50% + 12px);
   }
 }
