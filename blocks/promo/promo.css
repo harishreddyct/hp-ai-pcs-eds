@@ -102,6 +102,8 @@
 }
 
 .promo:where(.offset) .promo-content {
+  /* the reference's copy column runs 8px past the container on phones */
+  margin-right: -8px;
   padding-top: 26px;
 }
 
@@ -120,7 +122,8 @@
 }
 
 .promo:where(.large) .promo-media img {
-  aspect-ratio: auto;
+  /* phones: the reference's wider mobile crop (1.8:1); natural ratio from 768 */
+  aspect-ratio: 343 / 191;
   border-radius: 0;
 }
 
@@ -216,6 +219,7 @@
   }
 
   .promo:where(.offset) .promo-content {
+    margin-right: 0;
     padding: 40px 0;
   }
 

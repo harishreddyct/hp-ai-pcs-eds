@@ -88,29 +88,33 @@
 
 /* benefits: each item is a full-width row — icon column (1/6 of the row,
    icon centered in it) + text column, stacked, not a side-by-side card grid.
-   Icon is top-aligned with the first line of text. */
+   Reference row model: icon and copy are vertically centered on each other,
+   rows are padded 12px top and bottom and touch (no gap), and the list
+   starts one spacing step below the intro. */
 .cards.benefits > ul {
   grid-template-columns: 1fr;
-  gap: 12px;
+  gap: 0;
+  margin-top: var(--cards-space);
 }
 
 .cards.benefits > ul > li {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  padding: 12px 0;
   border: none;
   background: none;
 }
 
 .cards.benefits .cards-card-image {
   flex: 0 0 calc(100% / 6);
-  padding-top: var(--cards-space);
-  text-align: center;
 }
 
 .cards.benefits .cards-card-image img {
+  display: block;
   aspect-ratio: auto;
   width: 48px;
   height: auto;
+  margin: 0 auto;
 }
 
 .cards.benefits .cards-card-body {
@@ -120,7 +124,7 @@
 }
 
 .cards.benefits .cards-card-body p {
-  margin: var(--cards-space) 0 0;
+  margin: 0;
   line-height: 24px;
 }
 
@@ -130,18 +134,8 @@
 }
 
 @media (width >= 768px) {
-  .cards.benefits > ul {
-    gap: 4px;
-  }
-
   .cards.benefits .cards-card-body {
     padding-left: 0;
-  }
-}
-
-@media (width >= 1200px) {
-  .cards.benefits > ul {
-    gap: 16px;
   }
 }
 

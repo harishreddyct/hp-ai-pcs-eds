@@ -1,12 +1,16 @@
 /**
  * Fetches the footer fragment. Local preview serves content under /content,
- * DA/EDS serves it at the site root — try both, in that order.
+ * DA/EDS serves it at the site root — try both, in that order (the local
+ * copy only on the dev server).
  * @returns {Promise<{html: string, base: string}|null>}
  */
 async function fetchFooter() {
+  // the /content copy only exists on the local dev server; elsewhere it
+  // would be a guaranteed 404 (logged as a console error)
+  const isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname);
   let path = '/content/footer.plain.html';
-  let resp = await fetch('/content/footer.plain.html');
-  if (!resp.ok) {
+  let resp = isLocal ? await fetch('/content/footer.plain.html') : null;
+  if (!resp?.ok) {
     path = '/footer.plain.html';
     resp = await fetch('/footer.plain.html');
   }

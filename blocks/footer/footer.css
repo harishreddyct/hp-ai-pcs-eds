@@ -232,6 +232,13 @@ footer .footer-social img {
 footer .footer-legal-links {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+}
+
+/* 24px tap targets (WCAG 2.5.8); the reference's rows are 16px, too tight */
+footer .footer-container .footer-legal-links a:any-link {
+  display: inline-block;
+  padding: 5px 0;
 }
 
 footer .footer-legal-links li::after {

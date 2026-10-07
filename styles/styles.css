@@ -32,8 +32,8 @@
 }
 
 /* medium-weight display text: headings, section / promo intros, hero eyebrow + intro */
-:where(h1, h2, h3, h4, h5, h6, .default-content-wrapper > h2 + p, .hero-eyebrow, .hero-subtitle, .promo-content p),
-:where(h1, h2, h3, h4, h5, h6, .default-content-wrapper > h2 + p, .hero-eyebrow, .hero-subtitle, .promo-content p) * {
+:where(h1, h2, h3, h4, h5, h6, .default-content-wrapper > h2 + p, .hero-eyebrow, .hero-subtitle, .promo-content p:not(.button-wrapper)),
+:where(h1, h2, h3, h4, h5, h6, .default-content-wrapper > h2 + p, .hero-eyebrow, .hero-subtitle, .promo-content p:not(.button-wrapper)) * {
   letter-spacing: calc(0.907px - 0.0493em);
 }
 
@@ -476,6 +476,17 @@ main .section.dark .default-content-wrapper > :first-child {
   margin-top: 0;
 }
 
+/* the reference indents the dark section heading 4px below desktop */
+main .section.dark h2 {
+  margin-left: 4px;
+}
+
+@media (width >= 1200px) {
+  main .section.dark h2 {
+    margin-left: 0;
+  }
+}
+
 main .section.no-margin {
   margin: 0;
 }
@@ -487,15 +498,19 @@ main .section.centered .default-content-wrapper {
   text-align: center;
 }
 
-
 /* photo-bg: full-bleed background image with content overlaid on top,
-   same treatment as the promo dark variant but for a plain content section */
+   same treatment as the promo dark variant but for a plain content section.
+   Content is top-aligned in the card at the reference's fixed offsets:
+   heading 276px below the card top on phones (clear of the photo's
+   subject), 99px on tablet, 82px on desktop */
 main .section.photo-bg {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
   min-height: 800px;
+  padding-top: 276px;
   color: #fff;
 }
 
@@ -504,6 +519,14 @@ main .section.photo-bg h2,
 main .section.photo-bg h3,
 main .section.photo-bg p {
   color: inherit;
+}
+
+main .section.photo-bg .default-content-wrapper h2 {
+  margin-top: 0;
+}
+
+main .section.photo-bg .default-content-wrapper > :last-child {
+  margin-bottom: 0;
 }
 
 /* photo-bg intro: HP's subtitle-regular */
@@ -561,7 +584,7 @@ main .section.photo-bg .default-content-wrapper > :not(p:first-child) {
 /* the generic `main > .section > div { margin: auto }` would spread the
    free height of this flex column around each wrapper; keep them grouped
    (intro → first row is 24-32px on the reference) and let
-   justify-content center the group. Their auto side margins would also
+   the group stays together at the top. Their auto side margins would also
    shrink them to their content in this flex column, so give them the full
    container width explicitly (the column percentages depend on it). */
 main .section.photo-bg > div {
@@ -591,19 +614,13 @@ main .section.photo-bg > div:not(.default-content-wrapper) > div {
 @media (width >= 768px) {
   main .section.photo-bg {
     min-height: 580px;
+    padding-top: 99px;
   }
 
   main .section.photo-bg .default-content-wrapper > :not(p:first-child) {
     max-width: calc(70% - 68px);
     margin-left: calc(100% / 3 + 42px);
     margin-right: 0;
-  }
-
-  /* the card is flush top/bottom; give the real content breathing room so
-     it can never run past the image's edge even when content is tall
-     enough to define the section's own height */
-  main .section.photo-bg .default-content-wrapper h2 {
-    margin-top: 40px;
   }
 
   /* a block's wrapper keeps the same centered container box as
@@ -622,6 +639,7 @@ main .section.photo-bg > div:not(.default-content-wrapper) > div {
 @media (width >= 1200px) {
   main .section.photo-bg {
     min-height: 578px;
+    padding-top: 82px;
   }
 
   /* the card matches the container's content box (capped at the max width) */

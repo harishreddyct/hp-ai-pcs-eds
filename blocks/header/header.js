@@ -3,13 +3,17 @@ const isDesktop = window.matchMedia('(min-width: 960px)');
 
 /**
  * Fetches the nav fragment. Local preview serves content under /content,
- * DA/EDS serves it at the site root — try both, in that order.
+ * DA/EDS serves it at the site root — try both, in that order (the local
+ * copy only on the dev server).
  * @returns {Promise<{html: string, base: string}|null>}
  */
 async function fetchNav() {
+  // the /content copy only exists on the local dev server; elsewhere it
+  // would be a guaranteed 404 (logged as a console error)
+  const isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname);
   let path = '/content/nav.plain.html';
-  let resp = await fetch('/content/nav.plain.html');
-  if (!resp.ok) {
+  let resp = isLocal ? await fetch('/content/nav.plain.html') : null;
+  if (!resp?.ok) {
     path = '/nav.plain.html';
     resp = await fetch('/nav.plain.html');
   }
