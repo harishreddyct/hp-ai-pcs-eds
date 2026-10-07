@@ -31,8 +31,9 @@
   letter-spacing: calc(1.226px - 0.0735em);
 }
 
-:where(h1, h2, h3, h4, h5, h6, .default-content-wrapper > h2 + p),
-:where(h1, h2, h3, h4, h5, h6, .default-content-wrapper > h2 + p) * {
+/* medium-weight display text: headings, section / promo intros, hero eyebrow + intro */
+:where(h1, h2, h3, h4, h5, h6, .default-content-wrapper > h2 + p, .hero-eyebrow, .hero-subtitle, .promo-content p),
+:where(h1, h2, h3, h4, h5, h6, .default-content-wrapper > h2 + p, .hero-eyebrow, .hero-subtitle, .promo-content p) * {
   letter-spacing: calc(0.907px - 0.0493em);
 }
 
