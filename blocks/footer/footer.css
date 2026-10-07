@@ -291,7 +291,9 @@ footer .footer-copyright {
   }
 
   footer .footer-columns {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    /* equal columns, but (as on the reference) the social column never
+       narrows below its one-row icon width; the link columns give way */
+    grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(max-content, 1fr);
     gap: 20px;
     margin-top: 16px;
   }
